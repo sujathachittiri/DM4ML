@@ -1,0 +1,10 @@
+!mkdir -p /root/.config/kaggle
+!mv sample_data/kaggle.json /root/.config/kaggle/
+
+!chmod 600 /root/.config/kaggle/kaggle.json
+
+!pip install feast
+
+!pip install mlflow
+
+!pip install apache-airflow
