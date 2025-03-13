@@ -60,12 +60,11 @@ def process_dataset(df, dataset_name):
     logging.info(f"Handled missing values for {dataset_name} dataset.")
 
     # Identify categorical columns for One-Hot Encoding, excluding customerID and TotalCharges
-    #categorical_cols = [col for col in df.select_dtypes(include=['object']).columns if col not in ['customerID', 'TotalCharges','Surname']]
     categorical_cols = ['gender', 'SeniorCitizen', 'Partner', 'Dependents', 'PhoneService',
        'MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup',
        'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies',
-       'Contract', 'PaperlessBilling', 'PaymentMethod','Churn','Geography',
-                        'Gender','churn']
+       'Contract', 'PaperlessBilling', 'PaymentMethod','Geography',
+                        'Gender']
     categorical_cols = [col for col in categorical_cols if col in df.columns] # Filter columns that actually exist in df
     # Encode categorical variables using One-Hot Encoding
     if categorical_cols:
@@ -74,34 +73,50 @@ def process_dataset(df, dataset_name):
 
     # Standardize numerical variables
     scaler = StandardScaler()
-    #numeric_cols = df.select_dtypes(include=['number']).columns.tolist()
     numeric_cols = ['tenure','Tenure', 'MonthlyCharges', 'TotalCharges','CreditScore','Age','Balance','EstimatedSalary']
     numeric_cols = [col for col in numeric_cols if col in df.columns] # Filter columns that actually exist in df
-    # Convert numeric_cols to numeric, handling errors
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors='coerce') # Invalid values become NaN
         df[col].fillna(df[col].median(), inplace=True) # Fill NaNs with median
     df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
+    if 'Churn' in df.columns: 
+        df["Churn"] = df["Churn"].map({'Yes': 1, 'No': 0})
+    if 'Surname' in df.columns:
+        df.drop('Surname', axis=1, inplace=True)
     logging.info(f"Numerical variables standardized for {dataset_name} dataset.")
 
     return df
 
 def visualize_data(df, dataset_name):
-    """Generates visualizations for data exploration separately for each dataset."""
+    """Generates visualizations for data exploration while minimizing memory usage."""
     os.makedirs("data_lake/processed", exist_ok=True)
-
+    df_sample = df.sample(n=min(2000, len(df)), random_state=42)  # Further reduce sample size to 2000
+    
+    # Plot numerical features separately
+    numeric_cols = df_sample.select_dtypes(include=['number']).columns.tolist()
     plt.figure(figsize=(12, 6))
-    sns.histplot(df, kde=True)
-    plt.title(f"Distribution of Numerical Features - {dataset_name}")
-    plt.savefig(f"data_lake/processed/distribution_plot_{dataset_name}.png")
-    logging.info(f"Generated histogram for numerical features for {dataset_name} dataset.")
-
+    df_sample[numeric_cols].hist(figsize=(12, 10), bins=20, layout=(4, 3))
+    plt.tight_layout()
+    plt.savefig(f"data_lake/processed/numeric_distribution_{dataset_name}.png")
+    logging.info(f"Generated histogram for numerical features in {dataset_name} dataset.")
+    
+    # Boxplot for numerical features
     plt.figure(figsize=(12, 6))
-    sns.boxplot(data=df)
-    plt.title(f"Boxplot for Outlier Detection - {dataset_name}")
+    sns.boxplot(data=df_sample[numeric_cols])
     plt.xticks(rotation=90)
+    plt.title(f"Boxplot for Outlier Detection - {dataset_name}")
     plt.savefig(f"data_lake/processed/boxplot_{dataset_name}.png")
-    logging.info(f"Generated boxplot for outlier detection for {dataset_name} dataset.")
+    logging.info(f"Generated boxplot for numerical features in {dataset_name} dataset.")
+    
+    # Plot categorical features separately
+    categorical_cols = df_sample.select_dtypes(include=['object']).columns.tolist()
+    for col in categorical_cols:
+        plt.figure(figsize=(8, 4))
+        sns.countplot(x=df_sample[col])
+        plt.xticks(rotation=45)
+        plt.title(f"Distribution of {col} - {dataset_name}")
+        plt.savefig(f"data_lake/processed/categorical_{col}_{dataset_name}.png")
+        logging.info(f"Generated count plot for {col} in {dataset_name} dataset.")
 
 def save_cleaned_data(df, dataset_name):
     """Saves the cleaned dataset separately for each source."""
@@ -118,11 +133,11 @@ if __name__ == "__main__":
     # Process and save the local churn dataset
     if df_local is not None:
         df_local = process_dataset(df_local, "local")
-        #visualize_data(df_local, "local")
+        visualize_data(df_local, "local")
         save_cleaned_data(df_local, "local")
 
     # Process and save the Kaggle churn dataset
     if df_kaggle is not None:
         df_kaggle = process_dataset(df_kaggle, "kaggle")
-        #visualize_data(df_kaggle, "kaggle")
+        visualize_data(df_kaggle, "kaggle")
         save_cleaned_data(df_kaggle, "kaggle")
