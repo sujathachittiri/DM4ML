@@ -1,0 +1,13 @@
+2025-03-13 06:03:52,570 - INFO - Handled missing values for local dataset.
+2025-03-13 06:03:52,579 - INFO - Categorical variables encoded using One-Hot Encoding for local dataset.
+2025-03-13 06:03:52,589 - INFO - Numerical variables standardized for local dataset.
+2025-03-13 06:03:54,692 - INFO - Generated histogram for numerical features in local dataset.
+2025-03-13 06:03:55,182 - INFO - Generated boxplot for numerical features in local dataset.
+2025-03-13 06:03:55,382 - INFO - Cleaned data saved to data_lake/processed/cleaned_data_local.csv
+2025-03-13 06:03:55,410 - INFO - Handled missing values for kaggle dataset.
+2025-03-13 06:03:55,452 - INFO - Categorical variables encoded using One-Hot Encoding for kaggle dataset.
+2025-03-13 06:03:55,467 - INFO - Numerical variables standardized for kaggle dataset.
+2025-03-13 06:03:56,624 - INFO - Generated histogram for numerical features in kaggle dataset.
+2025-03-13 06:03:57,002 - INFO - Generated boxplot for numerical features in kaggle dataset.
+2025-03-13 06:04:09,838 - INFO - Generated count plot for customerID in kaggle dataset.
+2025-03-13 06:04:10,019 - INFO - Cleaned data saved to data_lake/processed/cleaned_data_kaggle.csv

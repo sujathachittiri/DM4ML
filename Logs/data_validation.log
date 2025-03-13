@@ -1,0 +1,9 @@
+2025-03-13 06:01:28,242 - WARNING - Customer Churn Data has missing values: {'Surname': 2, 'Geography': 3, 'Gender': 3}
+2025-03-13 06:01:28,242 - INFO - Validated data types for Customer Churn Data
+2025-03-13 06:01:28,255 - INFO - No duplicate records found in Customer Churn Data
+2025-03-13 06:01:28,259 - WARNING - Customer Churn Data has 10 outliers in CreditScore
+2025-03-13 06:01:28,260 - WARNING - Customer Churn Data has 5 outliers in Age
+2025-03-13 06:01:28,261 - WARNING - Customer Churn Data has 1 outliers in Tenure
+2025-03-13 06:01:28,263 - WARNING - Customer Churn Data has 60 outliers in NumOfProducts
+2025-03-13 06:01:28,266 - ERROR - No recent API data file found.
+2025-03-13 06:01:28,269 - INFO - Data quality report saved to data_lake/processed/data_quality_report.csv

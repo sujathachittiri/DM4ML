@@ -1,0 +1,4 @@
+2025-03-13 06:10:12,690 - INFO - Feature store configured for churn_kaggle.
+2025-03-13 06:10:12,691 - INFO - Sample feature retrieval query saved for churn_kaggle.
+2025-03-13 06:10:12,757 - INFO - Feature store configured for churn_local.
+2025-03-13 06:10:12,757 - INFO - Sample feature retrieval query saved for churn_local.

@@ -1,0 +1,12 @@
+2025-03-13 06:25:36,791 - INFO - RandomForest_local Performance: {'accuracy': 0.867, 'precision': 0.757085020242915, 'recall': 0.4758269720101781, 'f1_score': 0.584375}
+2025-03-13 06:25:36,795 - INFO - Performance report saved: reports/performance_report_RandomForest_local_local.csv
+2025-03-13 06:25:36,852 - INFO - LogisticRegression_local Performance: {'accuracy': 0.8225, 'precision': 0.6233766233766234, 'recall': 0.24427480916030533, 'f1_score': 0.3510054844606947}
+2025-03-13 06:25:36,854 - INFO - Performance report saved: reports/performance_report_LogisticRegression_local_local.csv
+2025-03-13 06:25:41,292 - INFO - Model saved: models/RandomForest_local.pkl
+2025-03-13 06:25:45,277 - INFO - Model saved: models/LogisticRegression_local.pkl
+2025-03-13 06:25:46,269 - INFO - RandomForest_kaggle Performance: {'accuracy': 0.7934705464868701, 'precision': 0.6518518518518519, 'recall': 0.4718498659517426, 'f1_score': 0.5474339035769828}
+2025-03-13 06:25:46,270 - INFO - Performance report saved: reports/performance_report_RandomForest_kaggle_kaggle.csv
+2025-03-13 06:25:46,433 - INFO - LogisticRegression_kaggle Performance: {'accuracy': 0.8204400283889283, 'precision': 0.6851851851851852, 'recall': 0.5951742627345844, 'f1_score': 0.6370157819225251}
+2025-03-13 06:25:46,436 - INFO - Performance report saved: reports/performance_report_LogisticRegression_kaggle_kaggle.csv
+2025-03-13 06:25:51,632 - INFO - Model saved: models/RandomForest_kaggle.pkl
+2025-03-13 06:25:55,673 - INFO - Model saved: models/LogisticRegression_kaggle.pkl

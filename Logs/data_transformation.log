@@ -1,0 +1,6 @@
+2025-03-13 06:07:12,563 - INFO - Feature engineering applied to local dataset.
+2025-03-13 06:07:12,654 - INFO - Stored local dataset in database table churn_local.
+2025-03-13 06:07:12,656 - INFO - Feature engineering applied to kaggle dataset.
+2025-03-13 06:07:12,813 - INFO - Stored kaggle dataset in database table churn_kaggle.
+2025-03-13 06:07:12,813 - INFO - Sample SQL queries saved.
+2025-03-13 06:07:12,813 - INFO - Transformation summary saved.
