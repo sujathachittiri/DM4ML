@@ -1,0 +1,12 @@
+
+    Data Transformation Summary:
+    - Local dataset:
+      - Created 'TotalBalance' = Balance * NumOfProducts
+      - Created 'TenurePerProduct' = Tenure / (NumOfProducts + 1)
+      - Created 'ActivityScore' = IsActiveMember * HasCrCard
+    - Kaggle dataset:
+      - Created 'AvgMonthlySpend' = MonthlyCharges * tenure
+      - Created 'ChargePerMonth' = TotalCharges / (tenure + 1)
+    - Transformed data stored in SQLite database with tables: churn_local, churn_kaggle
+    - Sample queries provided in 'data_lake/database/sample_queries.sql'
+    
