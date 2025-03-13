@@ -32,6 +32,7 @@ def identify_columns(df, dataset_name):
     if dataset_name == "local":
         id_column = "CustomerId"
         target_column = "Exited"
+        surname_column = "Surname"
     elif dataset_name == "kaggle":
         id_column = "customerID"
         target_column = "Churn"
@@ -44,7 +45,11 @@ def prepare_data(df, dataset_name):
     """Prepares data for model training by splitting into train and test sets."""
     id_column, target_column = identify_columns(df, dataset_name)
     
-    X = df.drop(columns=[id_column, target_column], errors='ignore')  # Remove ID & target variable
+    if dataset_name == "kaggle":
+        surname_column = "Surname"
+    else:
+        surname_column = None
+    X = df.drop(columns=[id_column, target_column, surname_column], errors='ignore')  # Remove ID & target variable
     y = df[target_column] if target_column in df.columns else None
     
     if y is None:
@@ -52,7 +57,7 @@ def prepare_data(df, dataset_name):
     
     return train_test_split(X, y, test_size=0.2, random_state=42)
 
-def train_and_evaluate(X_train, X_test, y_train, y_test, model, model_name):
+def train_and_evaluate(X_train, X_test, y_train, y_test, model, model_name, dataset_name):
     """Trains the given model and evaluates its performance."""
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
@@ -66,6 +71,14 @@ def train_and_evaluate(X_train, X_test, y_train, y_test, model, model_name):
     
     logging.info(f"{model_name} Performance: {metrics}")
     print(f"{model_name} Performance: {metrics}")
+    
+    # Save performance report
+    report_dir = "reports"
+    os.makedirs(report_dir, exist_ok=True)
+    report_path = os.path.join(report_dir, f"performance_report_{model_name}_{dataset_name}.csv")
+    pd.DataFrame([metrics]).to_csv(report_path, index=False)
+    logging.info(f"Performance report saved: {report_path}")
+    print(f"Performance report saved: {report_path}")
     
     return model, metrics
 
@@ -91,8 +104,8 @@ def train_models():
             X_train, X_test, y_train, y_test = prepare_data(df, dataset_name)
             
             # Train and evaluate models
-            rf_model, rf_metrics = train_and_evaluate(X_train, X_test, y_train, y_test, RandomForestClassifier(), f"RandomForest_{dataset_name}")
-            lr_model, lr_metrics = train_and_evaluate(X_train, X_test, y_train, y_test, LogisticRegression(max_iter=1000), f"LogisticRegression_{dataset_name}")
+            rf_model, rf_metrics = train_and_evaluate(X_train, X_test, y_train, y_test, RandomForestClassifier(), f"RandomForest_{dataset_name}", dataset_name)
+            lr_model, lr_metrics = train_and_evaluate(X_train, X_test, y_train, y_test, LogisticRegression(max_iter=1000), f"LogisticRegression_{dataset_name}", dataset_name)
             
             # Save models
             save_model(rf_model, f"RandomForest_{dataset_name}")
