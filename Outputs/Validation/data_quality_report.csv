@@ -1,0 +1,17 @@
+Check,Result,Suggested Solution
+Customer Churn Data - Missing Values,"{'Surname': 2, 'Geography': 3, 'Gender': 3}",Fill missing values using mean/median or remove rows
+Customer Churn Data - Data Types,"{'CustomerId': dtype('int64'), 'Surname': dtype('O'), 'CreditScore': dtype('int64'), 'Geography': dtype('O'), 'Gender': dtype('O'), 'Age': dtype('int64'), 'Tenure': dtype('int64'), 'Balance': dtype('float64'), 'NumOfProducts': dtype('int64'), 'HasCrCard': dtype('int64'), 'IsActiveMember': dtype('int64'), 'EstimatedSalary': dtype('float64'), 'Exited': dtype('int64')}","Ensure correct data types: Convert categorical to string, numerical to float/int if needed"
+Customer Churn Data - Range for CustomerId,"{'min': 15565701, 'max': 15815690}",Ensure values are within expected range
+Customer Churn Data - Range for CreditScore,"{'min': 1, 'max': 850}",Ensure values are within expected range
+Customer Churn Data - Outliers in CreditScore,10,Investigate and cap extreme values if necessary
+Customer Churn Data - Range for Age,"{'min': 2, 'max': 1158}",Ensure values are within expected range
+Customer Churn Data - Outliers in Age,5,Investigate and cap extreme values if necessary
+Customer Churn Data - Range for Tenure,"{'min': 0, 'max': 333}",Ensure values are within expected range
+Customer Churn Data - Outliers in Tenure,1,Investigate and cap extreme values if necessary
+Customer Churn Data - Range for Balance,"{'min': 0.0, 'max': 250898.09}",Ensure values are within expected range
+Customer Churn Data - Range for NumOfProducts,"{'min': 1, 'max': 4}",Ensure values are within expected range
+Customer Churn Data - Outliers in NumOfProducts,60,Investigate and cap extreme values if necessary
+Customer Churn Data - Range for HasCrCard,"{'min': 0, 'max': 1}",Ensure values are within expected range
+Customer Churn Data - Range for IsActiveMember,"{'min': 0, 'max': 1}",Ensure values are within expected range
+Customer Churn Data - Range for EstimatedSalary,"{'min': 11.58, 'max': 199992.48}",Ensure values are within expected range
+Customer Churn Data - Range for Exited,"{'min': 0, 'max': 1}",Ensure values are within expected range
