@@ -1,0 +1,4 @@
+Feature Metadata:
+TotalBalance - Customer total balance (Balance * NumOfProducts)
+TenurePerProduct - Tenure divided by number of products
+ActivityScore - IsActiveMember * HasCrCard

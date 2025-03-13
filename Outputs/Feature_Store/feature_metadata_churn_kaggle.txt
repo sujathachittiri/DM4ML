@@ -1,0 +1,3 @@
+Feature Metadata:
+AvgMonthlySpend - Monthly Charges multiplied by tenure
+ChargePerMonth - Total Charges divided by tenure
